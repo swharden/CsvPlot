@@ -34,6 +34,10 @@
             this.tbFile = new System.Windows.Forms.TextBox();
             this.cbFirstColX = new System.Windows.Forms.CheckBox();
             this.cbSignal = new System.Windows.Forms.CheckBox();
+            this.nudColumn = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cbAllColumns = new System.Windows.Forms.CheckBox();
+            ((System.ComponentModel.ISupportInitialize)(this.nudColumn)).BeginInit();
             this.SuspendLayout();
             // 
             // formsPlot1
@@ -87,12 +91,45 @@
             this.cbSignal.Text = "evenly spaced Xs";
             this.cbSignal.UseVisualStyleBackColor = true;
             // 
+            // nudColumn
+            // 
+            this.nudColumn.Location = new System.Drawing.Point(524, 12);
+            this.nudColumn.Name = "nudColumn";
+            this.nudColumn.Size = new System.Drawing.Size(57, 20);
+            this.nudColumn.TabIndex = 6;
+            this.nudColumn.ValueChanged += new System.EventHandler(this.nudColumn_ValueChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(473, 15);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(45, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Column:";
+            // 
+            // cbAllColumns
+            // 
+            this.cbAllColumns.AutoSize = true;
+            this.cbAllColumns.Checked = true;
+            this.cbAllColumns.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbAllColumns.Location = new System.Drawing.Point(587, 13);
+            this.cbAllColumns.Name = "cbAllColumns";
+            this.cbAllColumns.Size = new System.Drawing.Size(36, 17);
+            this.cbAllColumns.TabIndex = 8;
+            this.cbAllColumns.Text = "all";
+            this.cbAllColumns.UseVisualStyleBackColor = true;
+            this.cbAllColumns.CheckedChanged += new System.EventHandler(this.cbAllColumns_CheckedChanged);
+            // 
             // Form1
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.cbAllColumns);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.nudColumn);
             this.Controls.Add(this.cbSignal);
             this.Controls.Add(this.cbFirstColX);
             this.Controls.Add(this.tbFile);
@@ -104,6 +141,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Form1_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Form1_DragEnter);
+            ((System.ComponentModel.ISupportInitialize)(this.nudColumn)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -116,6 +154,9 @@
         private System.Windows.Forms.TextBox tbFile;
         private System.Windows.Forms.CheckBox cbFirstColX;
         private System.Windows.Forms.CheckBox cbSignal;
+        private System.Windows.Forms.NumericUpDown nudColumn;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox cbAllColumns;
     }
 }
 

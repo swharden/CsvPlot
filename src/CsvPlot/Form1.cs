@@ -27,6 +27,10 @@ namespace CsvPlot
 
         }
 
+        private void cbFirstColX_CheckedChanged(object sender, EventArgs e) => MakePlot();
+        private void nudColumn_ValueChanged(object sender, EventArgs e) => MakePlot();
+        private void cbAllColumns_CheckedChanged(object sender, EventArgs e) => MakePlot();
+
         private void btnSelectFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog diag = new OpenFileDialog();
@@ -49,10 +53,12 @@ namespace CsvPlot
             cbSignal.Checked = true;
             cbSignal.Enabled = (values.GetLength(0) < 1000);
 
+            nudColumn.Maximum = values.GetLength(1);
+            cbAllColumns.Checked = true;
+
             MakePlot();
         }
 
-        private void cbFirstColX_CheckedChanged(object sender, EventArgs e) => MakePlot();
 
         private void MakePlot()
         {
@@ -72,8 +78,12 @@ namespace CsvPlot
                         for (int i = 0; i < values.GetLength(0); i++)
                             ys[i] = values[i, y];
 
-                        Color c = cmap.GetColor((double)y / values.GetLength(1));
-                        formsPlot1.plt.PlotSignal(ys, sampleRate: 1 / dX, color: c);
+                        Color? c = null;
+                        if (cbAllColumns.Checked)
+                            c = cmap.GetColor((double)y / values.GetLength(1));
+
+                        if (cbAllColumns.Checked || nudColumn.Value == y)
+                            formsPlot1.plt.PlotSignal(ys, sampleRate: 1 / dX, color: c);
                     }
                 }
                 else
@@ -89,8 +99,12 @@ namespace CsvPlot
                         for (int i = 0; i < values.GetLength(0); i++)
                             ys[i] = values[i, y];
 
-                        Color c = cmap.GetColor((double)y / values.GetLength(1));
-                        formsPlot1.plt.PlotScatter(xs, ys, color: c);
+                        Color? c = null;
+                        if (cbAllColumns.Checked)
+                            c = cmap.GetColor((double)y / values.GetLength(1));
+
+                        if (cbAllColumns.Checked || nudColumn.Value == y)
+                            formsPlot1.plt.PlotScatter(xs, ys, color: c);
                     }
                 }
             }
@@ -103,8 +117,12 @@ namespace CsvPlot
                     for (int i = 0; i < values.GetLength(0); i++)
                         ys[i] = values[i, y];
 
-                    Color c = cmap.GetColor((double)y / values.GetLength(1));
-                    formsPlot1.plt.PlotSignal(ys, color: c);
+                    Color? c = null;
+                    if (cbAllColumns.Checked)
+                        c = cmap.GetColor((double)y / values.GetLength(1));
+
+                    if (cbAllColumns.Checked || nudColumn.Value == y)
+                        formsPlot1.plt.PlotSignal(ys, color: c);
                 }
             }
 
